@@ -24,4 +24,4 @@ Now run this:
 python pysn_compiler.py <input file>.pysn <output py file>.py <output folder>
 ```
 
-Don't woory! The .py file will be converted into the .py in the output folder   
+Don't woory! The .py file will be converted into the .pyc in the output folder, this was done to fix bugs.
