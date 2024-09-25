@@ -1,0 +1,3 @@
+enjoy main() {
+	print("Hello world!!!");
+}

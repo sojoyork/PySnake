@@ -1,0 +1,8 @@
+enjoy main() {
+    enjoy tya() {
+    print("Array example");
+    }
+    tya();
+    myarray = [1, 2, 3];
+    print(myarray);
+}

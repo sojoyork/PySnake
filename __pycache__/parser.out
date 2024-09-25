@@ -1,0 +1,379 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    SEMICOLON
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE
+Rule 2     statements -> statements statement
+Rule 3     statements -> statement
+Rule 4     statement -> PRINT LPAREN STRING RPAREN
+Rule 5     statement -> ID EQUALS expression
+Rule 6     expression -> expression PLUS term
+Rule 7     expression -> expression MINUS term
+Rule 8     expression -> term
+Rule 9     term -> term TIMES factor
+Rule 10    term -> term DIVIDE factor
+Rule 11    term -> factor
+Rule 12    factor -> NUMBER
+Rule 13    factor -> ID
+
+Terminals, with rules where they appear
+
+DIVIDE               : 10
+ENJOY                : 1
+EQUALS               : 5
+ID                   : 5 13
+LBRACE               : 1
+LPAREN               : 1 4
+MAIN                 : 1
+MINUS                : 7
+NUMBER               : 12
+PLUS                 : 6
+PRINT                : 4
+RBRACE               : 1
+RPAREN               : 1 4
+SEMICOLON            : 
+STRING               : 4
+TIMES                : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 5 6 7
+factor               : 9 10 11
+program              : 0
+statement            : 2 3
+statements           : 1 2
+term                 : 6 7 8 9 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE
+
+    ENJOY           shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> ENJOY . MAIN LPAREN RPAREN LBRACE statements RBRACE
+
+    MAIN            shift and go to state 3
+
+
+state 3
+
+    (1) program -> ENJOY MAIN . LPAREN RPAREN LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 4
+
+
+state 4
+
+    (1) program -> ENJOY MAIN LPAREN . RPAREN LBRACE statements RBRACE
+
+    RPAREN          shift and go to state 5
+
+
+state 5
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . PRINT LPAREN STRING RPAREN
+    (5) statement -> . ID EQUALS expression
+
+    PRINT           shift and go to state 9
+    ID              shift and go to state 10
+
+    statements                     shift and go to state 7
+    statement                      shift and go to state 8
+
+state 7
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . PRINT LPAREN STRING RPAREN
+    (5) statement -> . ID EQUALS expression
+
+    RBRACE          shift and go to state 11
+    PRINT           shift and go to state 9
+    ID              shift and go to state 10
+
+    statement                      shift and go to state 12
+
+state 8
+
+    (3) statements -> statement .
+
+    RBRACE          reduce using rule 3 (statements -> statement .)
+    PRINT           reduce using rule 3 (statements -> statement .)
+    ID              reduce using rule 3 (statements -> statement .)
+
+
+state 9
+
+    (4) statement -> PRINT . LPAREN STRING RPAREN
+
+    LPAREN          shift and go to state 13
+
+
+state 10
+
+    (5) statement -> ID . EQUALS expression
+
+    EQUALS          shift and go to state 14
+
+
+state 11
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE .
+
+    $end            reduce using rule 1 (program -> ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE .)
+
+
+state 12
+
+    (2) statements -> statements statement .
+
+    RBRACE          reduce using rule 2 (statements -> statements statement .)
+    PRINT           reduce using rule 2 (statements -> statements statement .)
+    ID              reduce using rule 2 (statements -> statements statement .)
+
+
+state 13
+
+    (4) statement -> PRINT LPAREN . STRING RPAREN
+
+    STRING          shift and go to state 15
+
+
+state 14
+
+    (5) statement -> ID EQUALS . expression
+    (6) expression -> . expression PLUS term
+    (7) expression -> . expression MINUS term
+    (8) expression -> . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . factor
+    (12) factor -> . NUMBER
+    (13) factor -> . ID
+
+    NUMBER          shift and go to state 20
+    ID              shift and go to state 16
+
+    expression                     shift and go to state 17
+    term                           shift and go to state 18
+    factor                         shift and go to state 19
+
+state 15
+
+    (4) statement -> PRINT LPAREN STRING . RPAREN
+
+    RPAREN          shift and go to state 21
+
+
+state 16
+
+    (13) factor -> ID .
+
+    TIMES           reduce using rule 13 (factor -> ID .)
+    DIVIDE          reduce using rule 13 (factor -> ID .)
+    PLUS            reduce using rule 13 (factor -> ID .)
+    MINUS           reduce using rule 13 (factor -> ID .)
+    RBRACE          reduce using rule 13 (factor -> ID .)
+    PRINT           reduce using rule 13 (factor -> ID .)
+    ID              reduce using rule 13 (factor -> ID .)
+
+
+state 17
+
+    (5) statement -> ID EQUALS expression .
+    (6) expression -> expression . PLUS term
+    (7) expression -> expression . MINUS term
+
+    RBRACE          reduce using rule 5 (statement -> ID EQUALS expression .)
+    PRINT           reduce using rule 5 (statement -> ID EQUALS expression .)
+    ID              reduce using rule 5 (statement -> ID EQUALS expression .)
+    PLUS            shift and go to state 22
+    MINUS           shift and go to state 23
+
+
+state 18
+
+    (8) expression -> term .
+    (9) term -> term . TIMES factor
+    (10) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 8 (expression -> term .)
+    MINUS           reduce using rule 8 (expression -> term .)
+    RBRACE          reduce using rule 8 (expression -> term .)
+    PRINT           reduce using rule 8 (expression -> term .)
+    ID              reduce using rule 8 (expression -> term .)
+    TIMES           shift and go to state 24
+    DIVIDE          shift and go to state 25
+
+
+state 19
+
+    (11) term -> factor .
+
+    TIMES           reduce using rule 11 (term -> factor .)
+    DIVIDE          reduce using rule 11 (term -> factor .)
+    PLUS            reduce using rule 11 (term -> factor .)
+    MINUS           reduce using rule 11 (term -> factor .)
+    RBRACE          reduce using rule 11 (term -> factor .)
+    PRINT           reduce using rule 11 (term -> factor .)
+    ID              reduce using rule 11 (term -> factor .)
+
+
+state 20
+
+    (12) factor -> NUMBER .
+
+    TIMES           reduce using rule 12 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 12 (factor -> NUMBER .)
+    PLUS            reduce using rule 12 (factor -> NUMBER .)
+    MINUS           reduce using rule 12 (factor -> NUMBER .)
+    RBRACE          reduce using rule 12 (factor -> NUMBER .)
+    PRINT           reduce using rule 12 (factor -> NUMBER .)
+    ID              reduce using rule 12 (factor -> NUMBER .)
+
+
+state 21
+
+    (4) statement -> PRINT LPAREN STRING RPAREN .
+
+    RBRACE          reduce using rule 4 (statement -> PRINT LPAREN STRING RPAREN .)
+    PRINT           reduce using rule 4 (statement -> PRINT LPAREN STRING RPAREN .)
+    ID              reduce using rule 4 (statement -> PRINT LPAREN STRING RPAREN .)
+
+
+state 22
+
+    (6) expression -> expression PLUS . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . factor
+    (12) factor -> . NUMBER
+    (13) factor -> . ID
+
+    NUMBER          shift and go to state 20
+    ID              shift and go to state 16
+
+    term                           shift and go to state 26
+    factor                         shift and go to state 19
+
+state 23
+
+    (7) expression -> expression MINUS . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . factor
+    (12) factor -> . NUMBER
+    (13) factor -> . ID
+
+    NUMBER          shift and go to state 20
+    ID              shift and go to state 16
+
+    term                           shift and go to state 27
+    factor                         shift and go to state 19
+
+state 24
+
+    (9) term -> term TIMES . factor
+    (12) factor -> . NUMBER
+    (13) factor -> . ID
+
+    NUMBER          shift and go to state 20
+    ID              shift and go to state 16
+
+    factor                         shift and go to state 28
+
+state 25
+
+    (10) term -> term DIVIDE . factor
+    (12) factor -> . NUMBER
+    (13) factor -> . ID
+
+    NUMBER          shift and go to state 20
+    ID              shift and go to state 16
+
+    factor                         shift and go to state 29
+
+state 26
+
+    (6) expression -> expression PLUS term .
+    (9) term -> term . TIMES factor
+    (10) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 6 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 6 (expression -> expression PLUS term .)
+    RBRACE          reduce using rule 6 (expression -> expression PLUS term .)
+    PRINT           reduce using rule 6 (expression -> expression PLUS term .)
+    ID              reduce using rule 6 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 24
+    DIVIDE          shift and go to state 25
+
+
+state 27
+
+    (7) expression -> expression MINUS term .
+    (9) term -> term . TIMES factor
+    (10) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 7 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 7 (expression -> expression MINUS term .)
+    RBRACE          reduce using rule 7 (expression -> expression MINUS term .)
+    PRINT           reduce using rule 7 (expression -> expression MINUS term .)
+    ID              reduce using rule 7 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 24
+    DIVIDE          shift and go to state 25
+
+
+state 28
+
+    (9) term -> term TIMES factor .
+
+    TIMES           reduce using rule 9 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 9 (term -> term TIMES factor .)
+    PLUS            reduce using rule 9 (term -> term TIMES factor .)
+    MINUS           reduce using rule 9 (term -> term TIMES factor .)
+    RBRACE          reduce using rule 9 (term -> term TIMES factor .)
+    PRINT           reduce using rule 9 (term -> term TIMES factor .)
+    ID              reduce using rule 9 (term -> term TIMES factor .)
+
+
+state 29
+
+    (10) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 10 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 10 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 10 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 10 (term -> term DIVIDE factor .)
+    RBRACE          reduce using rule 10 (term -> term DIVIDE factor .)
+    PRINT           reduce using rule 10 (term -> term DIVIDE factor .)
+    ID              reduce using rule 10 (term -> term DIVIDE factor .)
+

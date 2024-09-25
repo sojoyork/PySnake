@@ -1,0 +1,1860 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE
+Rule 2     statements -> statements statement
+Rule 3     statements -> statement
+Rule 4     statement -> ID DOT ID EQUALS boolean SEMICOLON
+Rule 5     boolean -> TRUE
+Rule 6     boolean -> FALSE
+Rule 7     statement -> IS ID SEMICOLON
+Rule 8     statement -> PRINT LPAREN STRING RPAREN SEMICOLON
+Rule 9     statement -> ID EQUALS expression SEMICOLON
+Rule 10    statement -> PRINT LPAREN ID RPAREN SEMICOLON
+Rule 11    expression -> expression PLUS term
+Rule 12    expression -> expression MINUS term
+Rule 13    expression -> term
+Rule 14    term -> term TIMES factor
+Rule 15    term -> term DIVIDE factor
+Rule 16    term -> factor
+Rule 17    factor -> NUMBER
+Rule 18    factor -> ID
+Rule 19    statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+Rule 20    else_part -> ELSE LBRACE statements RBRACE
+Rule 21    else_part -> empty
+Rule 22    statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+Rule 23    statement -> FOREVER LBRACE statements RBRACE
+Rule 24    statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+Rule 25    elements -> expression COMMA elements
+Rule 26    elements -> expression COMMA
+Rule 27    elements -> expression
+Rule 28    expression -> ID LBRACKET expression RBRACKET
+Rule 29    expression -> LBRACKET elements RBRACKET
+Rule 30    statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+Rule 31    statement -> ID LPAREN RPAREN SEMICOLON
+Rule 32    empty -> <empty>
+Rule 33    statement -> TOML_START toml_content TOML_END
+Rule 34    toml_content -> toml_line toml_content
+Rule 35    toml_content -> toml_line
+Rule 36    toml_line -> ID EQUALS STRING
+Rule 37    toml_line -> ID EQUALS boolean
+Rule 38    statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+Rule 39    statement -> IF boolean THEN statement
+Rule 40    statement -> IF boolean THEN statement ELSE statement
+Rule 41    boolean -> boolean OR boolean
+Rule 42    boolean -> boolean AND boolean
+Rule 43    boolean -> NOT boolean
+
+Terminals, with rules where they appear
+
+AND                  : 42
+COMMA                : 25 26
+DIVIDE               : 15
+DOT                  : 4
+ELSE                 : 20 40
+ENJOY                : 1 30
+EQUALS               : 4 9 24 36 37 38
+FALSE                : 6
+FOREVER              : 23
+ID                   : 4 4 7 9 10 18 24 28 30 31 36 37 38
+IF                   : 19 39 40
+INPUT                : 38
+IS                   : 7
+LBRACE               : 1 19 20 22 23 30
+LBRACKET             : 24 28 29
+LPAREN               : 1 8 10 19 22 30 31 38
+MAIN                 : 1
+MINUS                : 12
+NOT                  : 43
+NUMBER               : 17
+OR                   : 41
+PLUS                 : 11
+PRINT                : 8 10
+RBRACE               : 1 19 20 22 23 30
+RBRACKET             : 24 28 29
+RPAREN               : 1 8 10 19 22 30 31 38
+SEMICOLON            : 4 7 8 9 10 24 31 38
+STRING               : 8 36 38
+THEN                 : 39 40
+TIMES                : 14
+TOML_END             : 33
+TOML_START           : 33
+TRUE                 : 5
+UNTIL                : 22
+error                : 
+
+Nonterminals, with rules where they appear
+
+boolean              : 4 19 22 37 39 40 41 41 42 42 43
+elements             : 24 25 29
+else_part            : 19
+empty                : 21
+expression           : 9 11 12 25 26 27 28
+factor               : 14 15 16
+program              : 0
+statement            : 2 3 39 40 40
+statements           : 1 2 19 20 22 23 30
+term                 : 11 12 13 14 15
+toml_content         : 33 34
+toml_line            : 34 35
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE
+
+    ENJOY           shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> ENJOY . MAIN LPAREN RPAREN LBRACE statements RBRACE
+
+    MAIN            shift and go to state 3
+
+
+state 3
+
+    (1) program -> ENJOY MAIN . LPAREN RPAREN LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 4
+
+
+state 4
+
+    (1) program -> ENJOY MAIN LPAREN . RPAREN LBRACE statements RBRACE
+
+    RPAREN          shift and go to state 5
+
+
+state 5
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statements                     shift and go to state 8
+    statement                      shift and go to state 9
+
+state 7
+
+    (30) statement -> ENJOY . ID LPAREN RPAREN LBRACE statements RBRACE
+
+    ID              shift and go to state 17
+
+
+state 8
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    RBRACE          shift and go to state 18
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 19
+
+state 9
+
+    (3) statements -> statement .
+
+    RBRACE          reduce using rule 3 (statements -> statement .)
+    ID              reduce using rule 3 (statements -> statement .)
+    IS              reduce using rule 3 (statements -> statement .)
+    PRINT           reduce using rule 3 (statements -> statement .)
+    IF              reduce using rule 3 (statements -> statement .)
+    UNTIL           reduce using rule 3 (statements -> statement .)
+    FOREVER         reduce using rule 3 (statements -> statement .)
+    ENJOY           reduce using rule 3 (statements -> statement .)
+    TOML_START      reduce using rule 3 (statements -> statement .)
+
+
+state 10
+
+    (4) statement -> ID . DOT ID EQUALS boolean SEMICOLON
+    (9) statement -> ID . EQUALS expression SEMICOLON
+    (24) statement -> ID . EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (31) statement -> ID . LPAREN RPAREN SEMICOLON
+    (38) statement -> ID . EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+
+    DOT             shift and go to state 20
+    EQUALS          shift and go to state 21
+    LPAREN          shift and go to state 22
+
+
+state 11
+
+    (7) statement -> IS . ID SEMICOLON
+
+    ID              shift and go to state 23
+
+
+state 12
+
+    (8) statement -> PRINT . LPAREN STRING RPAREN SEMICOLON
+    (10) statement -> PRINT . LPAREN ID RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 24
+
+
+state 13
+
+    (19) statement -> IF . LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (39) statement -> IF . boolean THEN statement
+    (40) statement -> IF . boolean THEN statement ELSE statement
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    LPAREN          shift and go to state 25
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 26
+
+state 14
+
+    (22) statement -> UNTIL . LPAREN boolean RPAREN LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 30
+
+
+state 15
+
+    (23) statement -> FOREVER . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 31
+
+
+state 16
+
+    (33) statement -> TOML_START . toml_content TOML_END
+    (34) toml_content -> . toml_line toml_content
+    (35) toml_content -> . toml_line
+    (36) toml_line -> . ID EQUALS STRING
+    (37) toml_line -> . ID EQUALS boolean
+
+    ID              shift and go to state 34
+
+    toml_content                   shift and go to state 32
+    toml_line                      shift and go to state 33
+
+state 17
+
+    (30) statement -> ENJOY ID . LPAREN RPAREN LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 35
+
+
+state 18
+
+    (1) program -> ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE .
+
+    $end            reduce using rule 1 (program -> ENJOY MAIN LPAREN RPAREN LBRACE statements RBRACE .)
+
+
+state 19
+
+    (2) statements -> statements statement .
+
+    RBRACE          reduce using rule 2 (statements -> statements statement .)
+    ID              reduce using rule 2 (statements -> statements statement .)
+    IS              reduce using rule 2 (statements -> statements statement .)
+    PRINT           reduce using rule 2 (statements -> statements statement .)
+    IF              reduce using rule 2 (statements -> statements statement .)
+    UNTIL           reduce using rule 2 (statements -> statements statement .)
+    FOREVER         reduce using rule 2 (statements -> statements statement .)
+    ENJOY           reduce using rule 2 (statements -> statements statement .)
+    TOML_START      reduce using rule 2 (statements -> statements statement .)
+
+
+state 20
+
+    (4) statement -> ID DOT . ID EQUALS boolean SEMICOLON
+
+    ID              shift and go to state 36
+
+
+state 21
+
+    (9) statement -> ID EQUALS . expression SEMICOLON
+    (24) statement -> ID EQUALS . LBRACKET elements RBRACKET SEMICOLON
+    (38) statement -> ID EQUALS . INPUT LPAREN STRING RPAREN SEMICOLON
+    (11) expression -> . expression PLUS term
+    (12) expression -> . expression MINUS term
+    (13) expression -> . term
+    (28) expression -> . ID LBRACKET expression RBRACKET
+    (29) expression -> . LBRACKET elements RBRACKET
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    LBRACKET        shift and go to state 39
+    INPUT           shift and go to state 40
+    ID              shift and go to state 37
+    NUMBER          shift and go to state 43
+
+    expression                     shift and go to state 38
+    term                           shift and go to state 41
+    factor                         shift and go to state 42
+
+state 22
+
+    (31) statement -> ID LPAREN . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 44
+
+
+state 23
+
+    (7) statement -> IS ID . SEMICOLON
+
+    SEMICOLON       shift and go to state 45
+
+
+state 24
+
+    (8) statement -> PRINT LPAREN . STRING RPAREN SEMICOLON
+    (10) statement -> PRINT LPAREN . ID RPAREN SEMICOLON
+
+    STRING          shift and go to state 46
+    ID              shift and go to state 47
+
+
+state 25
+
+    (19) statement -> IF LPAREN . boolean RPAREN LBRACE statements RBRACE else_part
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 48
+
+state 26
+
+    (39) statement -> IF boolean . THEN statement
+    (40) statement -> IF boolean . THEN statement ELSE statement
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+    THEN            shift and go to state 49
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+
+state 27
+
+    (5) boolean -> TRUE .
+
+    THEN            reduce using rule 5 (boolean -> TRUE .)
+    OR              reduce using rule 5 (boolean -> TRUE .)
+    AND             reduce using rule 5 (boolean -> TRUE .)
+    RPAREN          reduce using rule 5 (boolean -> TRUE .)
+    ID              reduce using rule 5 (boolean -> TRUE .)
+    TOML_END        reduce using rule 5 (boolean -> TRUE .)
+    SEMICOLON       reduce using rule 5 (boolean -> TRUE .)
+
+
+state 28
+
+    (6) boolean -> FALSE .
+
+    THEN            reduce using rule 6 (boolean -> FALSE .)
+    OR              reduce using rule 6 (boolean -> FALSE .)
+    AND             reduce using rule 6 (boolean -> FALSE .)
+    RPAREN          reduce using rule 6 (boolean -> FALSE .)
+    ID              reduce using rule 6 (boolean -> FALSE .)
+    TOML_END        reduce using rule 6 (boolean -> FALSE .)
+    SEMICOLON       reduce using rule 6 (boolean -> FALSE .)
+
+
+state 29
+
+    (43) boolean -> NOT . boolean
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 52
+
+state 30
+
+    (22) statement -> UNTIL LPAREN . boolean RPAREN LBRACE statements RBRACE
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 53
+
+state 31
+
+    (23) statement -> FOREVER LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statements                     shift and go to state 54
+    statement                      shift and go to state 9
+
+state 32
+
+    (33) statement -> TOML_START toml_content . TOML_END
+
+    TOML_END        shift and go to state 55
+
+
+state 33
+
+    (34) toml_content -> toml_line . toml_content
+    (35) toml_content -> toml_line .
+    (34) toml_content -> . toml_line toml_content
+    (35) toml_content -> . toml_line
+    (36) toml_line -> . ID EQUALS STRING
+    (37) toml_line -> . ID EQUALS boolean
+
+    TOML_END        reduce using rule 35 (toml_content -> toml_line .)
+    ID              shift and go to state 34
+
+    toml_line                      shift and go to state 33
+    toml_content                   shift and go to state 56
+
+state 34
+
+    (36) toml_line -> ID . EQUALS STRING
+    (37) toml_line -> ID . EQUALS boolean
+
+    EQUALS          shift and go to state 57
+
+
+state 35
+
+    (30) statement -> ENJOY ID LPAREN . RPAREN LBRACE statements RBRACE
+
+    RPAREN          shift and go to state 58
+
+
+state 36
+
+    (4) statement -> ID DOT ID . EQUALS boolean SEMICOLON
+
+    EQUALS          shift and go to state 59
+
+
+state 37
+
+    (28) expression -> ID . LBRACKET expression RBRACKET
+    (18) factor -> ID .
+
+    LBRACKET        shift and go to state 60
+    TIMES           reduce using rule 18 (factor -> ID .)
+    DIVIDE          reduce using rule 18 (factor -> ID .)
+    SEMICOLON       reduce using rule 18 (factor -> ID .)
+    PLUS            reduce using rule 18 (factor -> ID .)
+    MINUS           reduce using rule 18 (factor -> ID .)
+    COMMA           reduce using rule 18 (factor -> ID .)
+    RBRACKET        reduce using rule 18 (factor -> ID .)
+
+
+state 38
+
+    (9) statement -> ID EQUALS expression . SEMICOLON
+    (11) expression -> expression . PLUS term
+    (12) expression -> expression . MINUS term
+
+    SEMICOLON       shift and go to state 61
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 39
+
+    (24) statement -> ID EQUALS LBRACKET . elements RBRACKET SEMICOLON
+    (29) expression -> LBRACKET . elements RBRACKET
+    (25) elements -> . expression COMMA elements
+    (26) elements -> . expression COMMA
+    (27) elements -> . expression
+    (11) expression -> . expression PLUS term
+    (12) expression -> . expression MINUS term
+    (13) expression -> . term
+    (28) expression -> . ID LBRACKET expression RBRACKET
+    (29) expression -> . LBRACKET elements RBRACKET
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    ID              shift and go to state 37
+    LBRACKET        shift and go to state 64
+    NUMBER          shift and go to state 43
+
+    elements                       shift and go to state 65
+    expression                     shift and go to state 66
+    term                           shift and go to state 41
+    factor                         shift and go to state 42
+
+state 40
+
+    (38) statement -> ID EQUALS INPUT . LPAREN STRING RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 67
+
+
+state 41
+
+    (13) expression -> term .
+    (14) term -> term . TIMES factor
+    (15) term -> term . DIVIDE factor
+
+    SEMICOLON       reduce using rule 13 (expression -> term .)
+    PLUS            reduce using rule 13 (expression -> term .)
+    MINUS           reduce using rule 13 (expression -> term .)
+    COMMA           reduce using rule 13 (expression -> term .)
+    RBRACKET        reduce using rule 13 (expression -> term .)
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 42
+
+    (16) term -> factor .
+
+    TIMES           reduce using rule 16 (term -> factor .)
+    DIVIDE          reduce using rule 16 (term -> factor .)
+    SEMICOLON       reduce using rule 16 (term -> factor .)
+    PLUS            reduce using rule 16 (term -> factor .)
+    MINUS           reduce using rule 16 (term -> factor .)
+    COMMA           reduce using rule 16 (term -> factor .)
+    RBRACKET        reduce using rule 16 (term -> factor .)
+
+
+state 43
+
+    (17) factor -> NUMBER .
+
+    TIMES           reduce using rule 17 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 17 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 17 (factor -> NUMBER .)
+    PLUS            reduce using rule 17 (factor -> NUMBER .)
+    MINUS           reduce using rule 17 (factor -> NUMBER .)
+    COMMA           reduce using rule 17 (factor -> NUMBER .)
+    RBRACKET        reduce using rule 17 (factor -> NUMBER .)
+
+
+state 44
+
+    (31) statement -> ID LPAREN RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 70
+
+
+state 45
+
+    (7) statement -> IS ID SEMICOLON .
+
+    RBRACE          reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    ID              reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    IS              reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    PRINT           reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    IF              reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    UNTIL           reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    FOREVER         reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    ENJOY           reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    TOML_START      reduce using rule 7 (statement -> IS ID SEMICOLON .)
+    ELSE            reduce using rule 7 (statement -> IS ID SEMICOLON .)
+
+
+state 46
+
+    (8) statement -> PRINT LPAREN STRING . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 71
+
+
+state 47
+
+    (10) statement -> PRINT LPAREN ID . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 72
+
+
+state 48
+
+    (19) statement -> IF LPAREN boolean . RPAREN LBRACE statements RBRACE else_part
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+    RPAREN          shift and go to state 73
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+
+state 49
+
+    (39) statement -> IF boolean THEN . statement
+    (40) statement -> IF boolean THEN . statement ELSE statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 74
+
+state 50
+
+    (41) boolean -> boolean OR . boolean
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 75
+
+state 51
+
+    (42) boolean -> boolean AND . boolean
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 76
+
+state 52
+
+    (43) boolean -> NOT boolean .
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    THEN            reduce using rule 43 (boolean -> NOT boolean .)
+    RPAREN          reduce using rule 43 (boolean -> NOT boolean .)
+    ID              reduce using rule 43 (boolean -> NOT boolean .)
+    TOML_END        reduce using rule 43 (boolean -> NOT boolean .)
+    SEMICOLON       reduce using rule 43 (boolean -> NOT boolean .)
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+  ! OR              [ reduce using rule 43 (boolean -> NOT boolean .) ]
+  ! AND             [ reduce using rule 43 (boolean -> NOT boolean .) ]
+
+
+state 53
+
+    (22) statement -> UNTIL LPAREN boolean . RPAREN LBRACE statements RBRACE
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+    RPAREN          shift and go to state 77
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+
+state 54
+
+    (23) statement -> FOREVER LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    RBRACE          shift and go to state 78
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 19
+
+state 55
+
+    (33) statement -> TOML_START toml_content TOML_END .
+
+    RBRACE          reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    ID              reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    IS              reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    PRINT           reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    IF              reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    UNTIL           reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    FOREVER         reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    ENJOY           reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    TOML_START      reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+    ELSE            reduce using rule 33 (statement -> TOML_START toml_content TOML_END .)
+
+
+state 56
+
+    (34) toml_content -> toml_line toml_content .
+
+    TOML_END        reduce using rule 34 (toml_content -> toml_line toml_content .)
+
+
+state 57
+
+    (36) toml_line -> ID EQUALS . STRING
+    (37) toml_line -> ID EQUALS . boolean
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    STRING          shift and go to state 79
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 80
+
+state 58
+
+    (30) statement -> ENJOY ID LPAREN RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 81
+
+
+state 59
+
+    (4) statement -> ID DOT ID EQUALS . boolean SEMICOLON
+    (5) boolean -> . TRUE
+    (6) boolean -> . FALSE
+    (41) boolean -> . boolean OR boolean
+    (42) boolean -> . boolean AND boolean
+    (43) boolean -> . NOT boolean
+
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    NOT             shift and go to state 29
+
+    boolean                        shift and go to state 82
+
+state 60
+
+    (28) expression -> ID LBRACKET . expression RBRACKET
+    (11) expression -> . expression PLUS term
+    (12) expression -> . expression MINUS term
+    (13) expression -> . term
+    (28) expression -> . ID LBRACKET expression RBRACKET
+    (29) expression -> . LBRACKET elements RBRACKET
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    ID              shift and go to state 37
+    LBRACKET        shift and go to state 64
+    NUMBER          shift and go to state 43
+
+    expression                     shift and go to state 83
+    term                           shift and go to state 41
+    factor                         shift and go to state 42
+
+state 61
+
+    (9) statement -> ID EQUALS expression SEMICOLON .
+
+    RBRACE          reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    ID              reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    IS              reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    PRINT           reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    IF              reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    UNTIL           reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    FOREVER         reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    ENJOY           reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    TOML_START      reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+    ELSE            reduce using rule 9 (statement -> ID EQUALS expression SEMICOLON .)
+
+
+state 62
+
+    (11) expression -> expression PLUS . term
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    NUMBER          shift and go to state 43
+    ID              shift and go to state 85
+
+    term                           shift and go to state 84
+    factor                         shift and go to state 42
+
+state 63
+
+    (12) expression -> expression MINUS . term
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    NUMBER          shift and go to state 43
+    ID              shift and go to state 85
+
+    term                           shift and go to state 86
+    factor                         shift and go to state 42
+
+state 64
+
+    (29) expression -> LBRACKET . elements RBRACKET
+    (25) elements -> . expression COMMA elements
+    (26) elements -> . expression COMMA
+    (27) elements -> . expression
+    (11) expression -> . expression PLUS term
+    (12) expression -> . expression MINUS term
+    (13) expression -> . term
+    (28) expression -> . ID LBRACKET expression RBRACKET
+    (29) expression -> . LBRACKET elements RBRACKET
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    ID              shift and go to state 37
+    LBRACKET        shift and go to state 64
+    NUMBER          shift and go to state 43
+
+    elements                       shift and go to state 87
+    expression                     shift and go to state 66
+    term                           shift and go to state 41
+    factor                         shift and go to state 42
+
+state 65
+
+    (24) statement -> ID EQUALS LBRACKET elements . RBRACKET SEMICOLON
+    (29) expression -> LBRACKET elements . RBRACKET
+
+    RBRACKET        shift and go to state 88
+
+
+state 66
+
+    (25) elements -> expression . COMMA elements
+    (26) elements -> expression . COMMA
+    (27) elements -> expression .
+    (11) expression -> expression . PLUS term
+    (12) expression -> expression . MINUS term
+
+    COMMA           shift and go to state 89
+    RBRACKET        reduce using rule 27 (elements -> expression .)
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 67
+
+    (38) statement -> ID EQUALS INPUT LPAREN . STRING RPAREN SEMICOLON
+
+    STRING          shift and go to state 90
+
+
+state 68
+
+    (14) term -> term TIMES . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    NUMBER          shift and go to state 43
+    ID              shift and go to state 85
+
+    factor                         shift and go to state 91
+
+state 69
+
+    (15) term -> term DIVIDE . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    NUMBER          shift and go to state 43
+    ID              shift and go to state 85
+
+    factor                         shift and go to state 92
+
+state 70
+
+    (31) statement -> ID LPAREN RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    ID              reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    IS              reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    PRINT           reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    IF              reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    UNTIL           reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    FOREVER         reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    ENJOY           reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    TOML_START      reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+    ELSE            reduce using rule 31 (statement -> ID LPAREN RPAREN SEMICOLON .)
+
+
+state 71
+
+    (8) statement -> PRINT LPAREN STRING RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 93
+
+
+state 72
+
+    (10) statement -> PRINT LPAREN ID RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 94
+
+
+state 73
+
+    (19) statement -> IF LPAREN boolean RPAREN . LBRACE statements RBRACE else_part
+
+    LBRACE          shift and go to state 95
+
+
+state 74
+
+    (39) statement -> IF boolean THEN statement .
+    (40) statement -> IF boolean THEN statement . ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    RBRACE          reduce using rule 39 (statement -> IF boolean THEN statement .)
+    ID              reduce using rule 39 (statement -> IF boolean THEN statement .)
+    IS              reduce using rule 39 (statement -> IF boolean THEN statement .)
+    PRINT           reduce using rule 39 (statement -> IF boolean THEN statement .)
+    IF              reduce using rule 39 (statement -> IF boolean THEN statement .)
+    UNTIL           reduce using rule 39 (statement -> IF boolean THEN statement .)
+    FOREVER         reduce using rule 39 (statement -> IF boolean THEN statement .)
+    ENJOY           reduce using rule 39 (statement -> IF boolean THEN statement .)
+    TOML_START      reduce using rule 39 (statement -> IF boolean THEN statement .)
+    ELSE            shift and go to state 96
+
+  ! ELSE            [ reduce using rule 39 (statement -> IF boolean THEN statement .) ]
+
+
+state 75
+
+    (41) boolean -> boolean OR boolean .
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    THEN            reduce using rule 41 (boolean -> boolean OR boolean .)
+    RPAREN          reduce using rule 41 (boolean -> boolean OR boolean .)
+    ID              reduce using rule 41 (boolean -> boolean OR boolean .)
+    TOML_END        reduce using rule 41 (boolean -> boolean OR boolean .)
+    SEMICOLON       reduce using rule 41 (boolean -> boolean OR boolean .)
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+  ! OR              [ reduce using rule 41 (boolean -> boolean OR boolean .) ]
+  ! AND             [ reduce using rule 41 (boolean -> boolean OR boolean .) ]
+
+
+state 76
+
+    (42) boolean -> boolean AND boolean .
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    THEN            reduce using rule 42 (boolean -> boolean AND boolean .)
+    RPAREN          reduce using rule 42 (boolean -> boolean AND boolean .)
+    ID              reduce using rule 42 (boolean -> boolean AND boolean .)
+    TOML_END        reduce using rule 42 (boolean -> boolean AND boolean .)
+    SEMICOLON       reduce using rule 42 (boolean -> boolean AND boolean .)
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+  ! OR              [ reduce using rule 42 (boolean -> boolean AND boolean .) ]
+  ! AND             [ reduce using rule 42 (boolean -> boolean AND boolean .) ]
+
+
+state 77
+
+    (22) statement -> UNTIL LPAREN boolean RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 97
+
+
+state 78
+
+    (23) statement -> FOREVER LBRACE statements RBRACE .
+
+    RBRACE          reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    ID              reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    IS              reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    PRINT           reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    IF              reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    UNTIL           reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    FOREVER         reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    ENJOY           reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    TOML_START      reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+    ELSE            reduce using rule 23 (statement -> FOREVER LBRACE statements RBRACE .)
+
+
+state 79
+
+    (36) toml_line -> ID EQUALS STRING .
+
+    ID              reduce using rule 36 (toml_line -> ID EQUALS STRING .)
+    TOML_END        reduce using rule 36 (toml_line -> ID EQUALS STRING .)
+
+
+state 80
+
+    (37) toml_line -> ID EQUALS boolean .
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+    ID              reduce using rule 37 (toml_line -> ID EQUALS boolean .)
+    TOML_END        reduce using rule 37 (toml_line -> ID EQUALS boolean .)
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+
+state 81
+
+    (30) statement -> ENJOY ID LPAREN RPAREN LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statements                     shift and go to state 98
+    statement                      shift and go to state 9
+
+state 82
+
+    (4) statement -> ID DOT ID EQUALS boolean . SEMICOLON
+    (41) boolean -> boolean . OR boolean
+    (42) boolean -> boolean . AND boolean
+
+    SEMICOLON       shift and go to state 99
+    OR              shift and go to state 50
+    AND             shift and go to state 51
+
+
+state 83
+
+    (28) expression -> ID LBRACKET expression . RBRACKET
+    (11) expression -> expression . PLUS term
+    (12) expression -> expression . MINUS term
+
+    RBRACKET        shift and go to state 100
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 84
+
+    (11) expression -> expression PLUS term .
+    (14) term -> term . TIMES factor
+    (15) term -> term . DIVIDE factor
+
+    SEMICOLON       reduce using rule 11 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 11 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 11 (expression -> expression PLUS term .)
+    COMMA           reduce using rule 11 (expression -> expression PLUS term .)
+    RBRACKET        reduce using rule 11 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 85
+
+    (18) factor -> ID .
+
+    TIMES           reduce using rule 18 (factor -> ID .)
+    DIVIDE          reduce using rule 18 (factor -> ID .)
+    SEMICOLON       reduce using rule 18 (factor -> ID .)
+    PLUS            reduce using rule 18 (factor -> ID .)
+    MINUS           reduce using rule 18 (factor -> ID .)
+    COMMA           reduce using rule 18 (factor -> ID .)
+    RBRACKET        reduce using rule 18 (factor -> ID .)
+
+
+state 86
+
+    (12) expression -> expression MINUS term .
+    (14) term -> term . TIMES factor
+    (15) term -> term . DIVIDE factor
+
+    SEMICOLON       reduce using rule 12 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 12 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 12 (expression -> expression MINUS term .)
+    COMMA           reduce using rule 12 (expression -> expression MINUS term .)
+    RBRACKET        reduce using rule 12 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 87
+
+    (29) expression -> LBRACKET elements . RBRACKET
+
+    RBRACKET        shift and go to state 101
+
+
+state 88
+
+    (24) statement -> ID EQUALS LBRACKET elements RBRACKET . SEMICOLON
+    (29) expression -> LBRACKET elements RBRACKET .
+
+  ! shift/reduce conflict for SEMICOLON resolved as shift
+    SEMICOLON       shift and go to state 102
+    PLUS            reduce using rule 29 (expression -> LBRACKET elements RBRACKET .)
+    MINUS           reduce using rule 29 (expression -> LBRACKET elements RBRACKET .)
+
+  ! SEMICOLON       [ reduce using rule 29 (expression -> LBRACKET elements RBRACKET .) ]
+
+
+state 89
+
+    (25) elements -> expression COMMA . elements
+    (26) elements -> expression COMMA .
+    (25) elements -> . expression COMMA elements
+    (26) elements -> . expression COMMA
+    (27) elements -> . expression
+    (11) expression -> . expression PLUS term
+    (12) expression -> . expression MINUS term
+    (13) expression -> . term
+    (28) expression -> . ID LBRACKET expression RBRACKET
+    (29) expression -> . LBRACKET elements RBRACKET
+    (14) term -> . term TIMES factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . ID
+
+    RBRACKET        reduce using rule 26 (elements -> expression COMMA .)
+    ID              shift and go to state 37
+    LBRACKET        shift and go to state 64
+    NUMBER          shift and go to state 43
+
+    expression                     shift and go to state 66
+    elements                       shift and go to state 103
+    term                           shift and go to state 41
+    factor                         shift and go to state 42
+
+state 90
+
+    (38) statement -> ID EQUALS INPUT LPAREN STRING . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 104
+
+
+state 91
+
+    (14) term -> term TIMES factor .
+
+    TIMES           reduce using rule 14 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 14 (term -> term TIMES factor .)
+    SEMICOLON       reduce using rule 14 (term -> term TIMES factor .)
+    PLUS            reduce using rule 14 (term -> term TIMES factor .)
+    MINUS           reduce using rule 14 (term -> term TIMES factor .)
+    COMMA           reduce using rule 14 (term -> term TIMES factor .)
+    RBRACKET        reduce using rule 14 (term -> term TIMES factor .)
+
+
+state 92
+
+    (15) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 15 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 15 (term -> term DIVIDE factor .)
+    SEMICOLON       reduce using rule 15 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 15 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 15 (term -> term DIVIDE factor .)
+    COMMA           reduce using rule 15 (term -> term DIVIDE factor .)
+    RBRACKET        reduce using rule 15 (term -> term DIVIDE factor .)
+
+
+state 93
+
+    (8) statement -> PRINT LPAREN STRING RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    ID              reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    IS              reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    PRINT           reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    IF              reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    UNTIL           reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    FOREVER         reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    ENJOY           reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    TOML_START      reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    ELSE            reduce using rule 8 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+
+
+state 94
+
+    (10) statement -> PRINT LPAREN ID RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    ID              reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    IS              reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    PRINT           reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    IF              reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    UNTIL           reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    FOREVER         reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    ENJOY           reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    TOML_START      reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+    ELSE            reduce using rule 10 (statement -> PRINT LPAREN ID RPAREN SEMICOLON .)
+
+
+state 95
+
+    (19) statement -> IF LPAREN boolean RPAREN LBRACE . statements RBRACE else_part
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statements                     shift and go to state 105
+    statement                      shift and go to state 9
+
+state 96
+
+    (40) statement -> IF boolean THEN statement ELSE . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 106
+
+state 97
+
+    (22) statement -> UNTIL LPAREN boolean RPAREN LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statements                     shift and go to state 107
+    statement                      shift and go to state 9
+
+state 98
+
+    (30) statement -> ENJOY ID LPAREN RPAREN LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    RBRACE          shift and go to state 108
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 19
+
+state 99
+
+    (4) statement -> ID DOT ID EQUALS boolean SEMICOLON .
+
+    RBRACE          reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    ID              reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    IS              reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    PRINT           reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    IF              reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    UNTIL           reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    FOREVER         reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    ENJOY           reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    TOML_START      reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+    ELSE            reduce using rule 4 (statement -> ID DOT ID EQUALS boolean SEMICOLON .)
+
+
+state 100
+
+    (28) expression -> ID LBRACKET expression RBRACKET .
+
+    SEMICOLON       reduce using rule 28 (expression -> ID LBRACKET expression RBRACKET .)
+    PLUS            reduce using rule 28 (expression -> ID LBRACKET expression RBRACKET .)
+    MINUS           reduce using rule 28 (expression -> ID LBRACKET expression RBRACKET .)
+    COMMA           reduce using rule 28 (expression -> ID LBRACKET expression RBRACKET .)
+    RBRACKET        reduce using rule 28 (expression -> ID LBRACKET expression RBRACKET .)
+
+
+state 101
+
+    (29) expression -> LBRACKET elements RBRACKET .
+
+    COMMA           reduce using rule 29 (expression -> LBRACKET elements RBRACKET .)
+    PLUS            reduce using rule 29 (expression -> LBRACKET elements RBRACKET .)
+    MINUS           reduce using rule 29 (expression -> LBRACKET elements RBRACKET .)
+    RBRACKET        reduce using rule 29 (expression -> LBRACKET elements RBRACKET .)
+
+
+state 102
+
+    (24) statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .
+
+    RBRACE          reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    ID              reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    IS              reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    PRINT           reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    IF              reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    UNTIL           reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    FOREVER         reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    ENJOY           reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    TOML_START      reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+    ELSE            reduce using rule 24 (statement -> ID EQUALS LBRACKET elements RBRACKET SEMICOLON .)
+
+
+state 103
+
+    (25) elements -> expression COMMA elements .
+
+    RBRACKET        reduce using rule 25 (elements -> expression COMMA elements .)
+
+
+state 104
+
+    (38) statement -> ID EQUALS INPUT LPAREN STRING RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 109
+
+
+state 105
+
+    (19) statement -> IF LPAREN boolean RPAREN LBRACE statements . RBRACE else_part
+    (2) statements -> statements . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    RBRACE          shift and go to state 110
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 19
+
+state 106
+
+    (40) statement -> IF boolean THEN statement ELSE statement .
+
+    RBRACE          reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    ID              reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    IS              reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    PRINT           reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    IF              reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    UNTIL           reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    FOREVER         reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    ENJOY           reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    TOML_START      reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+    ELSE            reduce using rule 40 (statement -> IF boolean THEN statement ELSE statement .)
+
+
+state 107
+
+    (22) statement -> UNTIL LPAREN boolean RPAREN LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    RBRACE          shift and go to state 111
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 19
+
+state 108
+
+    (30) statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .
+
+    RBRACE          reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    ID              reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    IS              reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    PRINT           reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    IF              reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    UNTIL           reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    FOREVER         reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    ENJOY           reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    TOML_START      reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+    ELSE            reduce using rule 30 (statement -> ENJOY ID LPAREN RPAREN LBRACE statements RBRACE .)
+
+
+state 109
+
+    (38) statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    ID              reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    IS              reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    PRINT           reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    IF              reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    UNTIL           reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    FOREVER         reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    ENJOY           reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    TOML_START      reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+    ELSE            reduce using rule 38 (statement -> ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON .)
+
+
+state 110
+
+    (19) statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE . else_part
+    (20) else_part -> . ELSE LBRACE statements RBRACE
+    (21) else_part -> . empty
+    (32) empty -> .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 113
+    RBRACE          reduce using rule 32 (empty -> .)
+    ID              reduce using rule 32 (empty -> .)
+    IS              reduce using rule 32 (empty -> .)
+    PRINT           reduce using rule 32 (empty -> .)
+    IF              reduce using rule 32 (empty -> .)
+    UNTIL           reduce using rule 32 (empty -> .)
+    FOREVER         reduce using rule 32 (empty -> .)
+    ENJOY           reduce using rule 32 (empty -> .)
+    TOML_START      reduce using rule 32 (empty -> .)
+
+  ! ELSE            [ reduce using rule 32 (empty -> .) ]
+
+    else_part                      shift and go to state 112
+    empty                          shift and go to state 114
+
+state 111
+
+    (22) statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .
+
+    RBRACE          reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    ID              reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    IS              reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    PRINT           reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    IF              reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    UNTIL           reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    FOREVER         reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    ENJOY           reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    TOML_START      reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+    ELSE            reduce using rule 22 (statement -> UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE .)
+
+
+state 112
+
+    (19) statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .
+
+    RBRACE          reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    ID              reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    IS              reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    PRINT           reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    IF              reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    UNTIL           reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    FOREVER         reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    ENJOY           reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    TOML_START      reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+    ELSE            reduce using rule 19 (statement -> IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part .)
+
+
+state 113
+
+    (20) else_part -> ELSE . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 115
+
+
+state 114
+
+    (21) else_part -> empty .
+
+    RBRACE          reduce using rule 21 (else_part -> empty .)
+    ID              reduce using rule 21 (else_part -> empty .)
+    IS              reduce using rule 21 (else_part -> empty .)
+    PRINT           reduce using rule 21 (else_part -> empty .)
+    IF              reduce using rule 21 (else_part -> empty .)
+    UNTIL           reduce using rule 21 (else_part -> empty .)
+    FOREVER         reduce using rule 21 (else_part -> empty .)
+    ENJOY           reduce using rule 21 (else_part -> empty .)
+    TOML_START      reduce using rule 21 (else_part -> empty .)
+    ELSE            reduce using rule 21 (else_part -> empty .)
+
+
+state 115
+
+    (20) else_part -> ELSE LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statements                     shift and go to state 116
+    statement                      shift and go to state 9
+
+state 116
+
+    (20) else_part -> ELSE LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . ID DOT ID EQUALS boolean SEMICOLON
+    (7) statement -> . IS ID SEMICOLON
+    (8) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (9) statement -> . ID EQUALS expression SEMICOLON
+    (10) statement -> . PRINT LPAREN ID RPAREN SEMICOLON
+    (19) statement -> . IF LPAREN boolean RPAREN LBRACE statements RBRACE else_part
+    (22) statement -> . UNTIL LPAREN boolean RPAREN LBRACE statements RBRACE
+    (23) statement -> . FOREVER LBRACE statements RBRACE
+    (24) statement -> . ID EQUALS LBRACKET elements RBRACKET SEMICOLON
+    (30) statement -> . ENJOY ID LPAREN RPAREN LBRACE statements RBRACE
+    (31) statement -> . ID LPAREN RPAREN SEMICOLON
+    (33) statement -> . TOML_START toml_content TOML_END
+    (38) statement -> . ID EQUALS INPUT LPAREN STRING RPAREN SEMICOLON
+    (39) statement -> . IF boolean THEN statement
+    (40) statement -> . IF boolean THEN statement ELSE statement
+
+    RBRACE          shift and go to state 117
+    ID              shift and go to state 10
+    IS              shift and go to state 11
+    PRINT           shift and go to state 12
+    IF              shift and go to state 13
+    UNTIL           shift and go to state 14
+    FOREVER         shift and go to state 15
+    ENJOY           shift and go to state 7
+    TOML_START      shift and go to state 16
+
+    statement                      shift and go to state 19
+
+state 117
+
+    (20) else_part -> ELSE LBRACE statements RBRACE .
+
+    RBRACE          reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    ID              reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    IS              reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    PRINT           reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    IF              reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    UNTIL           reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    FOREVER         reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    ENJOY           reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    TOML_START      reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+    ELSE            reduce using rule 20 (else_part -> ELSE LBRACE statements RBRACE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for OR in state 52 resolved as shift
+WARNING: shift/reduce conflict for AND in state 52 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 74 resolved as shift
+WARNING: shift/reduce conflict for OR in state 75 resolved as shift
+WARNING: shift/reduce conflict for AND in state 75 resolved as shift
+WARNING: shift/reduce conflict for OR in state 76 resolved as shift
+WARNING: shift/reduce conflict for AND in state 76 resolved as shift
+WARNING: shift/reduce conflict for SEMICOLON in state 88 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 110 resolved as shift
