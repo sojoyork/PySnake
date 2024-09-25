@@ -10,4 +10,12 @@ It is a programming langauge just made as a project AND made as a extennsio to p
 ### Installation
 If you need a test of this buggy language then copy this command:
 ```ssh
+git clone https://github.com/sojoyork/PySnake.git
 ```
+Then go to PySnake folder and type this code:
+```pysnake
+enjoy main() {
+  print("Hello world");
+}
+```
+save the file as you want but in the .pysn format.
