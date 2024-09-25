@@ -19,3 +19,9 @@ enjoy main() {
 }
 ```
 save the file as you want but in the .pysn format.
+Now run this:
+```ssh
+python pysn_compiler.py <input file>.pysn <output py file>.py <output folder>
+```
+
+Don't woory! The .py file will be converted into the .py in the output folder   
