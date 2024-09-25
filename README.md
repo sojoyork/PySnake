@@ -1,4 +1,5 @@
 # Pysnake
+A random python project!
 ## discription
 It is a programming langauge just made as a project AND made as a extennsio to python.
 
